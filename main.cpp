@@ -5,12 +5,13 @@
 #include <QLabel>
 
 
+
 int main(int argc, char *argv[])
 {
     QApplication program(argc, argv);
     MainWindow window;
 
-    window.setGeometry(100, 100, 500, 400);
+    /*window.setGeometry(100, 100, 500, 400);
     window.setWindowTitle("Okno Główne");
 
     QPushButton button("Zamknij", &window);
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     label.setGeometry(200, 150, 400, 50);
 
     QObject::connect(&button, SIGNAL(clicked()), &program, SLOT(quit()));
-
+    */
     window.show();
 
     return program.exec();

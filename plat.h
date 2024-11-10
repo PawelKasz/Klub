@@ -10,7 +10,16 @@ class plat : public QObject
 public:
     explicit plat(QObject *parent = nullptr);
 
+    int num_plata;  //To zastąpi nazwę
+    int kont_natarcia;
+    int sila_nosna;
+    int wychyl_lotki;
+
+    short oblicza_kon();       //Oblicza kont natarcia plata
+
+
 signals:
+
 
 };
 

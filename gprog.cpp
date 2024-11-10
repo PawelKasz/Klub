@@ -1,1 +1,1 @@
-/Coś tam
+//Coś tam
