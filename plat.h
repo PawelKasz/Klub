@@ -3,6 +3,13 @@
 
 #include <QObject>
 
+struct Moje_dane
+{
+    int wynik1;
+    int wynik2;
+    std::string wynik_txt;
+};
+
 class plat : public QObject
 {
     Q_OBJECT
@@ -11,12 +18,13 @@ public:
     //explicit plat(QObject *parent = nullptr);
 
     int num_plata;  //To zastąpi nazwę
-    int kont_natarcia = 2; //Tymczasowe wpisanie wartosci
+    int kont_natarcia; //Tymczasowe wpisanie wartosci
     int sila_nosna;
-    int wychyl_lotki = 5;
+    int wychyl_lotki;
 
     short oblicza_kon(int wychyl_lotki, int kont_natarcia);       //Oblicza kont natarcia plata
 
+    Moje_dane Funkcja();
 
 signals:
 
