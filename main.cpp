@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "mainwindow.h"
 #include <QApplication>
 #include <QPushButton>
@@ -5,11 +7,10 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QDebug>
+
 #include "plat.h"
-#include <iostream>
 
 using namespace std;
-
 
 int main(int argc, char *argv[])
 {
