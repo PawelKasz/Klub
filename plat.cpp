@@ -1,12 +1,6 @@
-#include "plat.h"
 #include <QDebug>
 
-//plat::plat(QObject *parent)
-//    : QObject{parent}
-//{
-
-
-
+#include "plat.h"
 
 short plat::oblicza_kon( int wychyl_lotki, int kont_natarcia ){
 
@@ -35,6 +29,3 @@ Moje_dane plat::Funkcja()
 
     return rezultat;
 }
-
-//return 0;
-//}

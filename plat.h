@@ -27,8 +27,6 @@ public:
     Moje_dane Funkcja();
 
 signals:
-
-
 };
 
 #endif // PLAT_H
