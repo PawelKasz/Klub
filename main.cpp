@@ -1,22 +1,29 @@
-#include "mainwindow.h"
+#include <iostream>
+
 #include <QApplication>
 #include <QPushButton>
 #include <QMainWindow>
 #include <QLabel>
 #include <QTextEdit>
 #include <QDebug>
+
+#include "mainwindow.h"
 #include "plat.h"
-#include <iostream>
+#include "dialog.h"
 
 using namespace std;
-
 
 int main(int argc, char *argv[])
 {
     QApplication program(argc, argv);
 
+    Dialog w;
+    w.show();
+
     qDebug() << "Hello" ;
     MainWindow window;
+    window.show();
+
     QTextEdit textedit;
     textedit.show();
 
@@ -32,11 +39,11 @@ int main(int argc, char *argv[])
     textedit.setPlainText(wynik_str);
 
 
-    Moje_dane rezultat = plat1.Funkcja();
+    /*Moje_dane rezultat = plat1.Funkcja();
 
     cout << "Rezultat to: " << rezultat.wynik1 << ";  " << rezultat.wynik2 << ", "
          << rezultat.wynik_txt << endl;
-
+    */
 
     /*window.setGeometry(100, 100, 500, 400);
     window.setWindowTitle("Okno Główne");
@@ -49,7 +56,8 @@ int main(int argc, char *argv[])
 
     QObject::connect(&button, SIGNAL(clicked()), &program, SLOT(quit()));
     */
-    window.show();
+
+    //window.show();
 
     return program.exec();
 }
