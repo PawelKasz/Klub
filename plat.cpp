@@ -12,19 +12,18 @@ short plat::oblicza_kon( int wychyl_lotki, int kont_natarcia ){
 
     if (wychyl_lotki > 0)
     {
-        kont_natarcia = kont_natarcia + wychyl_lotki;
+        kont_natarcia += wychyl_lotki;
     }
     else if(wychyl_lotki < 0)
     {
-        kont_natarcia = kont_natarcia - wychyl_lotki;
+        kont_natarcia -= wychyl_lotki;
     }
     else if(wychyl_lotki == 0)
     {
-        kont_natarcia = kont_natarcia - wychyl_lotki;
-    }
+            }
     return kont_natarcia;
 }
-
+/*
 Moje_dane plat::Funkcja()
 {
     Moje_dane rezultat;
@@ -35,6 +34,6 @@ Moje_dane plat::Funkcja()
 
     return rezultat;
 }
-
+*/
 //return 0;
 //}
