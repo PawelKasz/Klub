@@ -12,7 +12,7 @@ short plat::oblicza_kon( int wychyl_lotki, int kont_natarcia ){
 
     if (wychyl_lotki > 0)
     {
-        kont_natarcia = kont_natarcia + wychyl_lotki;
+        kont_natarcia += wychyl_lotki;
     }
     else if(wychyl_lotki < 0)
     {
