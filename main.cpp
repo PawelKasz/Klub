@@ -16,16 +16,21 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication program(argc, argv);
-
+    int *poz;
     Dialog w;
     w.show();
 
+    connect(horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
+
     qDebug() << "Hello" ;
     MainWindow window;
-    window.show();
+    window.move(250,150);
+    //window.show();
+
 
     QTextEdit textedit;
-    textedit.show();
+    //textedit.show();
+    textedit.move(100,200);
 
     plat plat1;  //Tworzy obiekt klasy plat
 

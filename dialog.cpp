@@ -38,16 +38,30 @@ Dialog::~Dialog()
     delete uii;
 }
 
+void Dialog::on_horizontalSlider_2_moved()
+{
+
+}
+
 
 void Dialog::on_pushButton_clicked()
 {
     uii->graphicsView->rotate(-2);
-    ellipse->setRotation(90);
+    //ellipse->setRotation(2);
+    ellipse->rotation();
+    //ellipse->setRotation(90);
 }
 
 
 void Dialog::on_pushButton_2_clicked()
 {
     uii->graphicsView->rotate(+2);
+}
+
+
+void Dialog::on_horizontalSlider_valueChanged(int value)
+{
+    int wartosc = value;
+
 }
 

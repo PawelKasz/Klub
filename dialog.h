@@ -23,6 +23,11 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_horizontalSlider_valueChanged(int value);
+
+    void horizontalSlider_2(int value);
+
+
 private:
     Ui::Dialog *uii;
     QGraphicsScene *scene;
