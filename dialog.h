@@ -25,8 +25,7 @@ private slots:
 
     void on_horizontalSlider_valueChanged(int value);
 
-    void horizontalSlider_2(int value);
-
+    void horizontalSlider_2_pressed();
 
 private:
     Ui::Dialog *uii;

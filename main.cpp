@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     Dialog w;
     w.show();
 
-    connect(horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
+    //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 
     qDebug() << "Hello" ;
     MainWindow window;

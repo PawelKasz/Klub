@@ -2,6 +2,7 @@
 #include "ui_dialog_1.h"
 #include "QGraphicsView"
 #include <QGraphicsItem>
+#include <QDebug>
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
@@ -38,9 +39,9 @@ Dialog::~Dialog()
     delete uii;
 }
 
-void Dialog::on_horizontalSlider_2_moved()
+void Dialog::horizontalSlider_2_presset()
 {
-
+    //qDebug() << "Ok";
 }
 
 
