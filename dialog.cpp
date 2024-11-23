@@ -1,8 +1,9 @@
 #include "dialog.h"
+#include "plat.h"
 #include "ui_dialog_1.h"
 #include "QGraphicsView"
 #include <QGraphicsItem>
-#include <QDebug>
+//#include <QDebug>
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
@@ -32,18 +33,10 @@ Dialog::Dialog(QWidget *parent)
 
 }
 
-
-
 Dialog::~Dialog()
 {
     delete uii;
 }
-
-void Dialog::horizontalSlider_2_presset()
-{
-    //qDebug() << "Ok";
-}
-
 
 void Dialog::on_pushButton_clicked()
 {
@@ -53,16 +46,21 @@ void Dialog::on_pushButton_clicked()
     //ellipse->setRotation(90);
 }
 
-
 void Dialog::on_pushButton_2_clicked()
 {
     uii->graphicsView->rotate(+2);
 }
 
-
 void Dialog::on_horizontalSlider_valueChanged(int value)
 {
     int wartosc = value;
+}
+
+void Dialog::on_horizontalSlider_2_pressed(int value)
+{
+    qDebug() << "Okkk";
+    Dialog::dane = value;
+    uii->horizontalSlider->sliderMoved(30);
 
 }
 

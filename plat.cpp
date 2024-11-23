@@ -5,6 +5,10 @@
 //    : QObject{parent}
 //{
 
+void plat::mojSlot()
+{
+
+}
 
 
 

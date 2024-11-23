@@ -16,9 +16,10 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication program(argc, argv);
-    int *poz;
+    //int *poz;
     Dialog w;
     w.show();
+
 
     //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 

@@ -14,6 +14,9 @@ class Dialog : public QDialog
 {
     Q_OBJECT
 
+    int dane;
+    int dane1;
+
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
@@ -24,8 +27,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_horizontalSlider_valueChanged(int value);
-
-    void horizontalSlider_2_pressed();
+//
+    void on_horizontalSlider_2_pressed(int value);
 
 private:
     Ui::Dialog *uii;

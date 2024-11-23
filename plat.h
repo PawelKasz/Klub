@@ -28,6 +28,9 @@ public:
 
 signals:
 
+private slots:
+    //void on_pushButon();
+    void mojSlot();
 
 };
 
