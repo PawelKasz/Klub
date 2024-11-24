@@ -1,11 +1,11 @@
 #include "dialog.h"
-#include "plat.h"
+//#include "plat.h"
 #include "ui_dialog_1.h"
 #include "QGraphicsView"
 #include <QGraphicsItem>
-//#include <QDebug>
+#include <QDebug>
 
-Dialog::Dialog(QWidget *parent)
+Dialog::Dialog(plat *p, QWidget *parent)
     : QDialog(parent)
     , uii(new Ui::Dialog)
 {
@@ -31,11 +31,18 @@ Dialog::Dialog(QWidget *parent)
     line = scene->addLine(-50,-50,200,-50,blackPen);
     line = scene->addLine(200,-50,240,-50,greenPen);
 
+    connect(uii->pushButton, SIGNAL(clicked()), p, SLOT( mojSlot()));
+    connect(this, SIGNAL(MKSignal()), p, SLOT( mojSlot()));
 }
 
 Dialog::~Dialog()
 {
     delete uii;
+}
+
+void Dialog::test()
+{
+    emit MKSignal();
 }
 
 void Dialog::on_pushButton_clicked()
@@ -44,23 +51,29 @@ void Dialog::on_pushButton_clicked()
     //ellipse->setRotation(2);
     ellipse->rotation();
     //ellipse->setRotation(90);
+    emit on_horizontalSlider_valueChanged(7);
 }
 
 void Dialog::on_pushButton_2_clicked()
 {
     uii->graphicsView->rotate(+2);
+    qDebug() << "Wcisnieto przycisk +1";
 }
 
 void Dialog::on_horizontalSlider_valueChanged(int value)
 {
     int wartosc = value;
+    qDebug() << "Wcisnieto przycisk -1";
 }
 
 void Dialog::on_horizontalSlider_2_pressed(int value)
 {
     qDebug() << "Okkk";
-    Dialog::dane = value;
-    uii->horizontalSlider->sliderMoved(30);
-
+    Dialog::dane = value;    
 }
+
+// void Dialog::MKSignal()
+// {
+
+// }
 

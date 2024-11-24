@@ -7,6 +7,7 @@
 
 void plat::mojSlot()
 {
+    qDebug() << "Wypis z mojSlot";
 
 }
 

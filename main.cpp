@@ -17,8 +17,13 @@ int main(int argc, char *argv[])
 {
     QApplication program(argc, argv);
     //int *poz;
-    Dialog w;
+    plat plat1;  //Tworzy obiekt klasy plat
+
+    Dialog w(&plat1);
     w.show();
+
+    w.test();
+
 
 
     //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
@@ -33,7 +38,6 @@ int main(int argc, char *argv[])
     //textedit.show();
     textedit.move(100,200);
 
-    plat plat1;  //Tworzy obiekt klasy plat
 
     short wynik = plat1.oblicza_kon(2,5);
     cout << wynik << endl;

@@ -27,6 +27,7 @@ public:
     Moje_dane Funkcja();
 
 signals:
+    void mySignals();
 
 private slots:
     //void on_pushButon();
