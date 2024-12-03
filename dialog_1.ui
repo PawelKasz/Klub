@@ -169,21 +169,5 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>horizontalSlider_2</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>label</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>545</x>
-     <y>567</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>300</x>
-     <y>541</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
 </ui>
