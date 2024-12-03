@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
     //textedit.show();
     textedit.move(100,200);
 
-
     short wynik = plat1.oblicza_kon(2,5);
     cout << wynik << endl;
 
@@ -55,7 +54,7 @@ int main(int argc, char *argv[])
          << rezultat.wynik_txt << endl;
     */
 
-    /*window.setGeometry(100, 100, 500, 400);
+  /*  window.setGeometry(100, 100, 500, 400);
     window.setWindowTitle("Okno Główne");
 
     QPushButton button("Zamknij", &window);
@@ -65,7 +64,7 @@ int main(int argc, char *argv[])
     label.setGeometry(200, 150, 400, 50);
 
     QObject::connect(&button, SIGNAL(clicked()), &program, SLOT(quit()));
-    */
+*/
 
     //window.show();
 
