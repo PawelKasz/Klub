@@ -1,11 +1,12 @@
 #include "dialog.h"
 //#include "plat.h"
+#include "skrzydlo.h"
 #include "ui_dialog_1.h"
 #include "QGraphicsView"
 #include <QGraphicsItem>
 #include <QDebug>
 
-Dialog::Dialog(plat *p, QWidget *parent)
+Dialog::Dialog(skrzydlo *p, QWidget *parent)
     : QDialog(parent)
     , uii(new Ui::Dialog)
 {
@@ -30,7 +31,11 @@ Dialog::Dialog(plat *p, QWidget *parent)
 
     line = scene->addLine(-50,-50,200,-50,blackPen);
     line = scene->addLine(200,-50,240,-50,greenPen);
+    line = scene->addLine(200,-40,238,-40,greenPen);
+    //line = scene->addLine(200,-50,240,-50,greenPen);
+    line = scene->addLine(200,-60,238,-60,greenPen);
 
+    connect(uii->pushButton, SIGNAL(clicked()), p, SLOT( mojSlot()));
     connect(uii->pushButton, SIGNAL(clicked()), p, SLOT( mojSlot()));
     connect(this, SIGNAL(MKSignal()), p, SLOT( mojSlot()));
 }

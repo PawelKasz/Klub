@@ -12,12 +12,14 @@ SOURCES += \
     dialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    plat.cpp
+    plat.cpp \
+    skrzydlo.cpp
 
 HEADERS += \
     dialog.h \
     mainwindow.h \
-    plat.h
+    plat.h \
+    skrzydlo.h
 
 FORMS += \
     dialog_1.ui \

@@ -9,6 +9,7 @@
 
 #include "mainwindow.h"
 #include "plat.h"
+#include "skrzydlo.h"
 #include "dialog.h"
 
 using namespace std;
@@ -18,13 +19,15 @@ int main(int argc, char *argv[])
     QApplication program(argc, argv);
     //int *poz;
     plat plat1;  //Tworzy obiekt klasy plat
+    skrzydlo skrz1;
 
-    Dialog w(&plat1);
+    Punkt sr{10, 15};
+    skrzydlo skrzydloMK(sr);
+
+    Dialog w(/*&plat1,*/ &skrz1);
     w.show();
 
-    w.test();
-
-
+    //w.test();
 
     //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 
@@ -33,19 +36,20 @@ int main(int argc, char *argv[])
     window.move(250,150);
     //window.show();
 
-
-    QTextEdit textedit;
+    //QTextEdit textedit;
     //textedit.show();
-    textedit.move(100,200);
+    //textedit.move(100,200);
 
-    short wynik = plat1.oblicza_kon(2,5);
-    cout << wynik << endl;
+    //short wynik = plat1.oblicza_kon(2,5);
+    //cout << wynik << endl;
 
-    std::string st = std::to_string(wynik);
-    char const *wsk_string = st.c_str();
+    //plat1.rysujPlat();
 
-    QString wynik_str(wsk_string);
-    textedit.setPlainText(wynik_str);
+    //std::string st = std::to_string(wynik);
+    //char const *wsk_string = st.c_str();
+
+    //QString wynik_str(wsk_string);
+    //textedit.setPlainText(wynik_str);
 
 
     /*Moje_dane rezultat = plat1.Funkcja();
