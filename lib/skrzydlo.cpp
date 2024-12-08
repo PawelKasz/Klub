@@ -54,6 +54,11 @@ void skrzydlo::rysujPlat(int srodekPlata[]){
     }
 }
 
+Punkt skrzydlo::srodek() const
+{
+    return m_srodek;
+}
+
 void skrzydlo::slotLot(){
     qDebug() << "Wypis z slotLot ";
 
