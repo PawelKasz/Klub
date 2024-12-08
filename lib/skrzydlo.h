@@ -34,6 +34,8 @@ public:
      void rysujLotke();
      void rysujPlat(int srodekSkrzy[]);
 
+     Punkt srodek() const;
+
  private:
      Punkt          m_srodek;
      int const      m_dlugosc{};

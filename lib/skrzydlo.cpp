@@ -9,6 +9,7 @@ Punkt skrzydlo::GetPoczatek() const
 {
 
 
+    return{-1, -1};
 }
 
 Punkt skrzydlo::GetKoniec() const
@@ -51,6 +52,11 @@ void skrzydlo::rysujPlat(int srodekPlata[]){
         qDebug() << "= skonePlata[i]";
 
     }
+}
+
+Punkt skrzydlo::srodek() const
+{
+    return m_srodek;
 }
 
 void skrzydlo::slotLot(){
