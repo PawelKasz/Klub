@@ -25,6 +25,9 @@ FORMS += \
     dialog_1.ui \
     mainwindow.ui
 
+SUBDIRS += \
+    tests/tests.pro
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
