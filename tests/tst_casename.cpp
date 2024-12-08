@@ -1,13 +1,19 @@
 
+#include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
 
-#include "../skrzydlo.h"
+#include "../lib/skrzydlo.h"
 
 using namespace testing;
 
 TEST(SuiteName, CaseName)
 {
-    EXPECT_EQ(1, 1);
-    ASSERT_THAT(0, Eq(0));
+    skrzydlo obj;
+
+    auto result = obj.GetPoczatek();
+
+    EXPECT_EQ(result.x, -1);
+    EXPECT_EQ(result.y, -1);
+    // EXPECT_EQ(1, 1);
 }
