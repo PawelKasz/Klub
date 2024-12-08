@@ -7,13 +7,15 @@
 
 using namespace testing;
 
-TEST(SuiteName, CaseName)
+TEST(Skrzydlo, PozycjaCentralna)
 {
-    skrzydlo obj;
+    // arrange
+    skrzydlo obj({123, 456});
 
-    auto result = obj.GetPoczatek();
+    // act
+    auto result = obj.srodek();
 
-    EXPECT_EQ(result.x, -1);
-    EXPECT_EQ(result.y, -1);
-    // EXPECT_EQ(1, 1);
+    // assert
+    EXPECT_EQ(result.x, 123);
+    EXPECT_EQ(result.y, 456);
 }
