@@ -1,6 +1,7 @@
-QT       += core gui
+QT += core gui widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = lib
+DEFINES += LIB_LIBRARY
 
 CONFIG += c++17
 
@@ -10,22 +11,23 @@ CONFIG += c++17
 
 SOURCES += \
     dialog.cpp \
-    main.cpp \
+    skrzydlo.cpp \
     mainwindow.cpp \
-    plat.cpp \
-    skrzydlo.cpp
+    plat.cpp
 
 HEADERS += \
+    lib_global.h \
     dialog.h \
+    skrzydlo.h \
     mainwindow.h \
-    plat.h \
-    skrzydlo.h
+    plat.h
 
 FORMS += \
     dialog_1.ui \
     mainwindow.ui
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+unix {
+    target.path = /usr/lib
+}
 !isEmpty(target.path): INSTALLS += target
