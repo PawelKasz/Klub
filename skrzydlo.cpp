@@ -1,8 +1,21 @@
 #include "skrzydlo.h"
 #include <QDebug>
+#include <math.h>
 
 skrzydlo::skrzydlo(Punkt srodek, int dlugosc, float kat):m_srodek(srodek), m_dlugosc(dlugosc), m_kat(kat)
 {
+    double radians=1.04720, degres;
+    double stopni = qRadiansToDegrees(radians);
+    qDebug() << "Stopni " <<stopni;
+
+    Punkt x;
+
+    int a =0;
+    qDebug() << a;
+    a = srodek.x + srodek.y;
+    qDebug() << a;
+    qDebug() << srodek.x;
+    qDebug() << srodek.y;
 }
 
 Punkt skrzydlo::GetPoczatek() const
