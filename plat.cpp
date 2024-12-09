@@ -25,9 +25,6 @@ short plat::oblicza_kon( int wychyl_lotki, int kont_natarcia ){
     {
         kont_natarcia -= wychyl_lotki;
     }
-    else if(wychyl_lotki == 0)
-    {
-            }
     return kont_natarcia;
 }
 
