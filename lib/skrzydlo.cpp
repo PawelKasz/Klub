@@ -4,6 +4,7 @@
 
 skrzydlo::skrzydlo(Punkt srodek, int dlugosc, float kat):m_srodek(srodek), m_dlugosc(dlugosc), m_kat(kat)
 {
+    /*
     double radians=1.04720, degres;
     double stopni = qRadiansToDegrees(radians);
     qDebug() << "Stopni " <<stopni;
@@ -16,11 +17,44 @@ skrzydlo::skrzydlo(Punkt srodek, int dlugosc, float kat):m_srodek(srodek), m_dlu
     qDebug() << a;
     qDebug() << srodek.x;
     qDebug() << srodek.y;
+    */
+    float bok_a = 0;
+    float bok_b = 0;
+    int zap_sr_x = srodek.x;
+    int zap_sr_y = srodek.y;
+    int pocz_s_x;
+    int pocz_s_y;
+
+    srodek.x = 0;
+    srodek.y = 0;
+    kat = 5;   //tymczasowo dla testów
+    if (kat==0){
+     int poczPlata = srodek.x - dlugosc;
+        qDebug( )<< "PoczPlata" << poczPlata;
+    }
+    else if(kat!=0){
+        if (kat >0 && kat <=90){
+            //bok = qDegreesToRadians(kat);
+            bok_a = dlugosc * sin(qDegreesToRadians(kat));
+        qDebug()<< "X- " << bok_a ;
+        bok_b = (dlugosc * dlugosc) - pow(bok_a,2) /* (bok_a * bok_a)*/;
+        bok_b = sqrt(bok_b);
+        bok_b = roundevenf(bok_b);
+        qDebug() << "Y- " << bok_b ;
+
+        pocz_s_x = bok_a;
+        pocz_s_y = bok_b;
+        }
+        else if(kat <90 && kat <=180){
+
+        }
+    }
+
+
 }
 
 Punkt skrzydlo::GetPoczatek() const
 {
-
 
     return{-1, -1};
 }

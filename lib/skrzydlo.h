@@ -23,7 +23,7 @@ public:
      char str;
 
      skrzydlo();
-     skrzydlo(Punkt srodek, int dlugosc = 10, float kat = 0);
+     skrzydlo(Punkt srodek, int dlugosc = 300, float kat = 0);
 
      Punkt GetPoczatek() const;
      Punkt GetKoniec() const;
