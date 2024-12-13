@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
     plat plat1;  //Tworzy obiekt klasy plat
     skrzydlo skrz1;
 
+
     Punkt sr{10, 15};
     skrzydlo skrzydloMK(sr);
 

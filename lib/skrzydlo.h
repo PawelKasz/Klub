@@ -17,16 +17,17 @@ public:
      int kont_natarcia; //Tymczasowe wpisanie wartosci
      int sila_nosna;
      int wychyl_lotki;
-     int srodekSkrzy[2]={0,0};
+     int srodekSkrzy[2]={100,100};
      int poczPlata[2];
      int koniePlata[2];
      char str;
 
-     skrzydlo();
-     skrzydlo(Punkt srodek, int dlugosc = 300, float kat = 0);
+     skrzydlo(){};
+     skrzydlo(Punkt srodek, int dlugosc = 300, float kat = 45);
 
      Punkt GetPoczatek() const;
      Punkt GetKoniec() const;
+     Punkt GetPoczatek2Ver() const;
 
     virtual  ~skrzydlo(){};
 
