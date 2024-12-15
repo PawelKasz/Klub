@@ -25,6 +25,8 @@ public:
 
     void test();
 
+    void NarysujLinie(QPen blackPen, skrzydlo *p);
+
 signals:
     void MKSignal();
 

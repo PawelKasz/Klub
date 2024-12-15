@@ -12,8 +12,8 @@ int main(int argc, char* argv[])
     //int *poz;
     plat plat1;  //Tworzy obiekt klasy plat
 
-    Punkt srodek{1, 2};
-    skrzydlo skrz1(srodek, 300, 45);
+    Punkt srodek{0, 0};
+    skrzydlo skrz1(srodek, 100, 45);
 
     skrzydlo skrz2(Punkt{3, 4}, 300, 45);
     skrzydlo skrz3({5, 6}, 300, 45);
@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
 
            //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 
-    qDebug() << "Hello" ;
+    //qDebug() << "Hello" ;
     MainWindow window;
-    window.move(250,150);
+    //window.move(250,150);
     //window.show();
 
            //QTextEdit textedit;

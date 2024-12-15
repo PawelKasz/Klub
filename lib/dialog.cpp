@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QDebug>
 
+
 Dialog::Dialog(skrzydlo *p, QWidget *parent)
     : QDialog(parent)
     , uii(new Ui::Dialog)
@@ -14,6 +15,8 @@ Dialog::Dialog(skrzydlo *p, QWidget *parent)
 
     scene = new QGraphicsScene (this);
     uii->graphicsView->setScene(scene);
+
+    scene->setSceneRect(-100, -100, 200, 200);  //To ustawia scene
 
     QBrush redBrush(Qt::red);
     QBrush blueBrush(Qt::blue);
@@ -24,10 +27,19 @@ Dialog::Dialog(skrzydlo *p, QWidget *parent)
     greenPen.setWidth(5);
 
 
-    ellipse = scene->addEllipse(-10,-10,300,100,blackPen,redBrush);
-    ellipse1 = scene->addEllipse(50,50,100,100,blackPen,greenBrush);
-    rectangle = scene->addRect(-75,-75,50,50);
+    ellipse = scene->addEllipse(0, 0,300,100,blackPen,redBrush);
+    ellipse1 = scene->addEllipse(0,0,100,100,blackPen,greenBrush);
+    rectangle = scene->addRect(-120,-50,5,5);
+    rectangle = scene->addRect(130,0,5,5);
+
+    rectangle = scene->addRect(-170,-50,5,5);
     rectangle->setFlag(QGraphicsItem::ItemIsMovable);
+
+    rectangle = scene->addRect(50,150,5,5);
+    rectangle->setFlag(QGraphicsItem::ItemIsMovable);
+
+
+    NarysujLinie(blackPen, p);
 
     line = scene->addLine(-50,-50,200,-50,blackPen);
     line = scene->addLine(200,-50,240,-50,greenPen);
@@ -43,6 +55,24 @@ Dialog::Dialog(skrzydlo *p, QWidget *parent)
 Dialog::~Dialog()
 {
     delete uii;
+}
+
+void Dialog::NarysujLinie(QPen blackPen, skrzydlo *p)
+{
+    auto wysokosc = uii->graphicsView->sceneRect().height();
+    auto szerokosc = uii->graphicsView->sceneRect().width();
+
+    auto poczatek2Ver = p->GetPoczatek2Ver();
+    auto koniec = p->GetKoniec();
+
+
+    int xPocznew = poczatek2Ver.x - szerokosc/2.0;
+    int xKoniecNew = koniec.x - szerokosc/2.0;
+
+    int yPocznew = - (poczatek2Ver.y - wysokosc/2.0);
+    int yKoniecew = - (koniec.y - wysokosc/2.0);
+
+    scene->addLine(xPocznew, yPocznew ,xKoniecNew, yKoniecew,blackPen);
 }
 
 void Dialog::test()
