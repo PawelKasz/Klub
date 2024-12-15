@@ -4,8 +4,10 @@
 #include <gtest/gtest.h>
 
 #include "../lib/skrzydlo.h"
+#include "qdebug.h"
 
 using namespace testing;
+
 
 TEST(Skrzydlo, PozycjaCentralna)
 {
@@ -25,21 +27,22 @@ TEST(Skrzydlo, PoczatekPoziomegoPlataWMinus300)
     // arrange
     skrzydlo punkt({0, 0}, 300, 0);
     // act
-    auto result = punkt.GetPoczatek();
+    auto result = punkt.GetPoczatek2Ver();
+
     // assert
-    EXPECT_EQ(result.x, -300);
-    EXPECT_EQ(result.y, 0);
+    EXPECT_EQ(result.x, 0);
+    EXPECT_EQ(result.y, 300);
 }
 
-TEST(Skrzydlo, PoczatekPoziomegoPlataPrzesunietegoMinus50)
+TEST(Skrzydlo, PoczatekPionowegoPlataPrzesunietegoMinus50)
 {
     // arrange
     skrzydlo punkt({-50, 50}, 300, 0);
     // act
-    auto result = punkt.GetPoczatek();
+    auto result = punkt.GetPoczatek2Ver();
     // assert
-    EXPECT_EQ(result.x, -350);
-    EXPECT_EQ(result.y, 0);
+    EXPECT_EQ(result.x, -50);
+    EXPECT_EQ(result.y, 350);
 }
 
 TEST(Skrzydlo,PoczPozPlat10dgr)
@@ -47,7 +50,7 @@ TEST(Skrzydlo,PoczPozPlat10dgr)
     // arrange
     skrzydlo punkt({0, 0}, 300, 10);
     // act
-    auto result = punkt.GetPoczatek();
+    auto result = punkt.GetPoczatek2Ver();
     // assert
     EXPECT_EQ(result.x, 52);
     EXPECT_EQ(result.y, 295);
@@ -155,12 +158,11 @@ TEST(Skrzydlo,PoczPozPlat315dgrV2)
 TEST(Skrzydlo,PoczPozPlat225dgr)
 {
     // arrange
-    skrzydlo punkt1({0, 0}, 300, 225);
+    skrzydlo punkt({0, 0}, 300, 225);
     // act
-    auto result = punkt1.GetPoczatek();
+    auto result = punkt.GetPoczatek2Ver();
     // assert
-    EXPECT_EQ(result.x, 212);
-
+    EXPECT_EQ(result.x, -212);
 }
 
 TEST(Skrzydlo, PoczatekObruconegoKat45DegMinus212)
@@ -168,22 +170,274 @@ TEST(Skrzydlo, PoczatekObruconegoKat45DegMinus212)
     // arrange
     skrzydlo punkt({0, 0}, 300, 45);
     // act
-    auto result = punkt.GetPoczatek();
+    auto result = punkt.GetPoczatek2Ver();
 
     // assert
     EXPECT_EQ(result.x, 212);
     EXPECT_EQ(result.y, 212);
 }
 
-TEST(Skrzydlo, PoczatekKont90Deg)
+
+TEST(Skrzydlo, DISABLED_WypiszWartosciCalegoZakresuKatow)
 {
+
     // arrange
-    skrzydlo punkt({0, 0}, 300, 175);
+    skrzydlo punkt({0, 0}, 300, 0);
+
     // act
-    auto result = punkt.GetPoczatek();
+    for(int i{0}; i<360; ++i)
+    {
+        punkt.setKat(i);
+        auto result = punkt.GetPoczatek2Ver();
+        // qDebug() << "[kat, x,y] = " << i << ", " << result.x << ", " << result.y;
+        std::cout << "[kat, x,y] = " << i << ", " << result.x << ", " << result.y << std::endl << std::flush;
+    }
+
     // assert
-    EXPECT_EQ(result.x, 26);
-    EXPECT_EQ(result.y, -298);
+    // EXPECT_EQ(result.x, 212);
+    // EXPECT_EQ(result.y, 212);
 }
 
+TEST(Skrzydlo, PoczatekKat0Dlugosc300)
+{
+    // arrange
+    skrzydlo punkt({0, 0}, 300, 0);
+
+    // act
+    punkt.setKat(0);
+    auto result = punkt.GetPoczatek2Ver();
+
+    // assert
+    EXPECT_EQ(result.x, 0);
+    EXPECT_EQ(result.y, 300);
+}
+
+TEST(Skrzydlo, PoczatekKat0Dlugosc200)
+{
+    // arrange
+    skrzydlo punkt({0, 0}, 200, 0);
+
+    // act
+    punkt.setKat(0);
+    auto result = punkt.GetPoczatek2Ver();
+
+    // assert
+    EXPECT_EQ(result.x, 0);
+    EXPECT_EQ(result.y, 200);
+}
+
+TEST(Skrzydlo, KoniecKat0Dlugosc300)
+{
+    int const dlugosc_poczatku = 300;
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, 0);
+
+    // act
+    punkt.setKat(0);
+    auto result = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(result.x, 0);
+    EXPECT_EQ(result.y, -dlugosc_konca);
+}
+
+TEST(Skrzydlo, KoniecKat0Dlugosc200)
+{
+    int const dlugosc_poczatku = 200;
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, 0);
+
+    // act
+    punkt.setKat(0);
+    auto result = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(result.x, 0);
+    EXPECT_EQ(result.y, -dlugosc_konca);
+}
+
+
+TEST(Skrzydlo, KoniecKat45Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{45};
+
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto result = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(result.x, poz_x);
+    EXPECT_EQ(result.y, poz_y);
+
+    EXPECT_LT(result.x, 0); // LT Mniejsze niz.
+    EXPECT_LT(result.y, 0); //
+}
+
+TEST(Skrzydlo, KoniecKat135Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{135};
+
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto result = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(result.x, poz_x);
+    EXPECT_EQ(result.y, poz_y);
+
+    EXPECT_LT(result.x, 0); // LT Mniejsze niz.
+    EXPECT_GT(result.y, 0); //
+}
+
+TEST(Skrzydlo, KoniecKat225Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{225};
+
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto result = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(result.x, poz_x);
+    EXPECT_EQ(result.y, poz_y);
+
+    EXPECT_GT(result.x, 0); // LT Mniejsze niz.
+    EXPECT_GT(result.y, 0); //
+}
+
+TEST(Skrzydlo, WspolrzedneKat0Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{0};
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto resultPoczatek = punkt.GetPoczatek2Ver();
+    auto resultKoniec = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(resultPoczatek.x, 0);
+    EXPECT_EQ(resultPoczatek.y, 300);
+
+    EXPECT_EQ(resultKoniec.x, poz_x);
+    EXPECT_EQ(resultKoniec.y, poz_y);
+
+
+    EXPECT_EQ(resultPoczatek.x, 0);
+    EXPECT_EQ(resultKoniec.x, 0);
+
+    EXPECT_GT(resultPoczatek.y, 0);
+    EXPECT_LT(resultKoniec.y, 0);
+}
+
+TEST(Skrzydlo, WspolrzedneKat90Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{90};
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto resultPoczatek = punkt.GetPoczatek2Ver();
+    auto resultKoniec = punkt.GetKoniec();
+
+    // assert
+    EXPECT_EQ(resultPoczatek.x, 300);
+    EXPECT_EQ(resultPoczatek.y, 0);
+
+    EXPECT_EQ(resultKoniec.x, poz_x);
+    EXPECT_EQ(resultKoniec.y, poz_y);
+
+    EXPECT_EQ(resultPoczatek.y, 0);
+    EXPECT_EQ(resultKoniec.y, 0);
+
+    EXPECT_GT(resultPoczatek.x, 0);
+    EXPECT_LT(resultKoniec.x, 0);
+}
+TEST(Skrzydlo, WspolrzedneKat400Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{400};
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto resultPoczatek = punkt.GetPoczatek2Ver();
+    auto resultKoniec = punkt.GetKoniec();
+
+    // assert
+    EXPECT_GT(resultPoczatek.y, 0);
+    EXPECT_LT(resultKoniec.y, 0);
+
+    EXPECT_GT(resultPoczatek.x, 0);
+    EXPECT_LT(resultKoniec.x, 0);
+}
+
+TEST(Skrzydlo, WspolrzedneKatMinus10Dlugosc300)
+{
+    int const dlugosc_poczatku{ 300};
+    int const dlugosc_konca = dlugosc_poczatku * 1.6;
+    int const kat_obrotu{-10};
+
+    int poz_x = dlugosc_konca * sin(qDegreesToRadians(kat_obrotu + 180));
+    int poz_y = dlugosc_konca * cos(qDegreesToRadians(kat_obrotu + 180));
+
+    // arrange
+    skrzydlo punkt({0, 0}, dlugosc_poczatku, kat_obrotu);
+
+    // act
+    auto resultPoczatek = punkt.GetPoczatek2Ver();
+    auto resultKoniec = punkt.GetKoniec();
+
+    // assert
+    EXPECT_GT(resultPoczatek.y, 0);
+    EXPECT_LT(resultKoniec.y, 0);
+
+    EXPECT_LT(resultPoczatek.x, 0);
+    EXPECT_GT(resultKoniec.x, 0);
+}
 

@@ -11,7 +11,15 @@ int main(int argc, char* argv[])
     QApplication program(argc, argv);
     //int *poz;
     plat plat1;  //Tworzy obiekt klasy plat
-    skrzydlo skrz1;
+
+    Punkt srodek{1, 2};
+    skrzydlo skrz1(srodek, 300, 45);
+
+    skrzydlo skrz2(Punkt{3, 4}, 300, 45);
+    skrzydlo skrz3({5, 6}, 300, 45);
+
+    Punkt resultPoczatek = skrz1.GetPoczatek2Ver();
+    Punkt resultKoniec = skrz1.GetKoniec();
 
 
     Punkt sr{10, 15};

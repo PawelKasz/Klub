@@ -23,9 +23,12 @@ public:
      char str;
 
      skrzydlo(){};
-     skrzydlo(Punkt srodek, int dlugosc = 300, float kat = 45);
+     skrzydlo(Punkt srodek, int dlugosc = 300, float kat = 0);
 
+
+     [[deprecated ("Uzywamy innej funkcji")]]
      Punkt GetPoczatek() const;
+
      Punkt GetKoniec() const;
      Punkt GetPoczatek2Ver() const;
 
@@ -37,10 +40,16 @@ public:
 
      Punkt srodek() const;
 
+     float kat() const;
+
+     void setKat(float newKat);
+
  private:
      Punkt          m_srodek;
-     int const      m_dlugosc{};
+     int const      m_dlugosc{}; // Dlugosc odcinka skrzydła od środka do "Poczatku".
      float          m_kat{};
+     float const m_proporcja{1.6}; // Proporcja czesci koncowej częsci skrzydla (60% dlugosci calkowitej)
+
 
  signals:
 

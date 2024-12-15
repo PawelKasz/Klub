@@ -40,7 +40,7 @@ Punkt skrzydlo::GetPoczatek() const
     else if(m_kat!=0){
         if (m_kat >0 && m_kat <=90){
             //bok = qDegreesToRadians(kat);
-            bok_a = m_dlugosc * cos(qDegreesToRadians(m_kat));
+            bok_a = m_dlugosc * sin(qDegreesToRadians(m_kat));
             qDebug()<< "X- " << bok_a ;
             bok_b = (m_dlugosc * m_dlugosc) - pow(bok_a,2) /* (bok_a * bok_a)*/;
             bok_b = roundevenf(bok_b);
@@ -88,30 +88,20 @@ Punkt skrzydlo::GetPoczatek() const
 
 Punkt skrzydlo::GetPoczatek2Ver() const
 {
-    int pocz_s_x;
-    int pocz_s_y;
+    int pocz_s_x = m_srodek.x + m_dlugosc * sin(qDegreesToRadians(m_kat));
+    int pocz_s_y = m_srodek.y + m_dlugosc * cos(qDegreesToRadians(m_kat));
 
-    //Punkt tmp_srodek = m_srodek;
-
-    if (m_kat==0){
-        int poczPlata = m_srodek.x - m_dlugosc;
-        qDebug( )<< "PoczPlata" << poczPlata;
-        return {poczPlata, 0};
-    }
-    else {
-        pocz_s_x = m_dlugosc * sin(qDegreesToRadians(m_kat));
-        pocz_s_y = m_dlugosc * cos(qDegreesToRadians(m_kat));
-
-        qDebug() << "Test ";
-
-        return {pocz_s_x, pocz_s_y};
-    }
-
+    return {pocz_s_x, pocz_s_y};
 }
 
 Punkt skrzydlo::GetKoniec() const
 {
+    Punkt const resultPoczatek = GetPoczatek2Ver();
 
+    int const wynik_y = resultPoczatek.y * m_proporcja;
+    int const wynik_x = resultPoczatek.x * m_proporcja;
+
+    return {-wynik_x, -wynik_y};
 }
 
 
@@ -149,6 +139,16 @@ void skrzydlo::rysujLotke(){
 Punkt skrzydlo::srodek() const
 {
     return m_srodek;
+}
+
+float skrzydlo::kat() const
+{
+    return m_kat;
+}
+
+void skrzydlo::setKat(float newKat)
+{
+    m_kat = newKat;
 }
 
 void skrzydlo::slotLot(){
