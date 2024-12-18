@@ -3,12 +3,18 @@
 
 #include <QObject>
 
-
 struct Punkt
 {
     int x{};
     int y{};
 };
+
+struct cieciwa
+{
+    Punkt poczatek{};
+    Punkt koniec{};
+};
+
 
 class skrzydlo: public QObject {
     Q_OBJECT
@@ -32,6 +38,8 @@ public:
      Punkt GetKoniec() const;
      Punkt GetPoczatek2Ver() const;
 
+     cieciwa GetCieciwa() const;
+
     virtual  ~skrzydlo(){};
 
      short oblicza_kont(int wychyl_lotki, int kont_natarcia);       //Oblicza kont natarcia plata
@@ -43,6 +51,8 @@ public:
      float kat() const;
 
      void setKat(float newKat);
+
+     void setSrodek(const Punkt &newSrodek);
 
  private:
      Punkt          m_srodek;

@@ -94,6 +94,14 @@ Punkt skrzydlo::GetPoczatek2Ver() const
     return {pocz_s_x, pocz_s_y};
 }
 
+cieciwa skrzydlo::GetCieciwa() const
+{
+    auto pocz = GetPoczatek2Ver();
+    auto koniec = GetKoniec();
+
+    return {pocz, koniec};
+}
+
 Punkt skrzydlo::GetKoniec() const
 {
     Punkt const resultPoczatek = GetPoczatek2Ver();
@@ -103,7 +111,6 @@ Punkt skrzydlo::GetKoniec() const
 
     return {-wynik_x, -wynik_y};
 }
-
 
 short skrzydlo::oblicza_kont( int wychyl_lotki, int kont_natarcia ){
 
@@ -121,20 +128,10 @@ short skrzydlo::oblicza_kont( int wychyl_lotki, int kont_natarcia ){
     //}
     return kont_natarcia;
 }
+
 void skrzydlo::rysujLotke(){
     qDebug() << "Wypis z rysujLotke ";
 }
-
-//void skrzydlo::rysujPlat(int srodekPlata[]){
-    //for (int i=0; i<2;i++){
-        //int xy1 = srodekPlata[i];
-        //int xy2 = srodekPlata[i+1];
-        //poczPlata[i] = xy1 - 15;
-        //konePlata[i] = xy2 + 25;
-
-        //qDebug() << "= skonePlata[i]";
-//    }
-//}
 
 Punkt skrzydlo::srodek() const
 {
@@ -149,6 +146,11 @@ float skrzydlo::kat() const
 void skrzydlo::setKat(float newKat)
 {
     m_kat = newKat;
+}
+
+void skrzydlo::setSrodek(const Punkt &newSrodek)
+{
+    m_srodek = newSrodek;
 }
 
 void skrzydlo::slotLot(){

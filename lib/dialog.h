@@ -21,11 +21,14 @@ class Dialog : public QDialog
 
 public:
     explicit Dialog(skrzydlo *p, QWidget *parent = nullptr);
+    Dialog(std::vector<std::unique_ptr<skrzydlo>> &skrzydlata_polska);
     ~Dialog();
 
     void test();
 
     void NarysujLinie(QPen blackPen, skrzydlo *p);
+
+    cieciwa ConvertToQtCoords(const cieciwa &nazwa) const;
 
 signals:
     void MKSignal();

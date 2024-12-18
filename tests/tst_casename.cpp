@@ -4,6 +4,8 @@
 #include <gtest/gtest.h>
 
 #include "../lib/skrzydlo.h"
+#include "../lib/dialog.h"
+#include "qapplication.h"
 #include "qdebug.h"
 
 using namespace testing;
@@ -441,3 +443,26 @@ TEST(Skrzydlo, WspolrzedneKatMinus10Dlugosc300)
     EXPECT_GT(resultKoniec.x, 0);
 }
 
+TEST(dialog, Przeliczenie_x_y){
+
+    // arrange
+    int argc{1};
+    char **argv{nullptr};
+    QApplication program(argc, argv);
+
+    skrzydlo punkt({0, 0}, 300, 45);
+    Dialog ob(&punkt);
+
+    // act
+    auto cieciwa = punkt.GetCieciwa();
+    auto result = ob.ConvertToQtCoords(cieciwa);
+
+    //assert
+
+    EXPECT_EQ(cieciwa.poczatek.x, result.poczatek.x);
+    EXPECT_EQ(cieciwa.koniec.x, result.koniec.x);
+
+    EXPECT_EQ(cieciwa.poczatek.y, -result.poczatek.y);
+    EXPECT_EQ(cieciwa.koniec.y, -result.koniec.y);
+
+}

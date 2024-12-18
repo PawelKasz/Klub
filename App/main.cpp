@@ -1,7 +1,6 @@
 #include "mainwindow.h"
-
+#include<memory.h>
 #include <QApplication>
-
 #include "../lib/plat.h"
 #include "../lib/skrzydlo.h"
 #include "../lib/dialog.h"
@@ -15,18 +14,25 @@ int main(int argc, char* argv[])
     Punkt srodek{0, 0};
     skrzydlo skrz1(srodek, 100, 45);
 
-    skrzydlo skrz2(Punkt{3, 4}, 300, 45);
-    skrzydlo skrz3({5, 6}, 300, 45);
+    std::vector<std::unique_ptr<skrzydlo>> SkrzydlataPolska;
+    SkrzydlataPolska.emplace_back(std::make_unique<skrzydlo>(Punkt{0, 0}, 100, 45));
+    SkrzydlataPolska.emplace_back(std::make_unique<skrzydlo>(Punkt{50, 50}, 150, 65));
+//     Dialog w(SkrzydlataPolska);
+
+    //skrzydlo skrz2(Punkt{3, 4}, 300, 45);
+    //skrzydlo skrz3({5, 6}, 300, 45);
 
     Punkt resultPoczatek = skrz1.GetPoczatek2Ver();
     Punkt resultKoniec = skrz1.GetKoniec();
-
 
     Punkt sr{10, 15};
     skrzydlo skrzydloMK(sr);
 
     Dialog w(/*&plat1,*/ &skrz1);
+
     w.show();
+
+
 
            //w.test();
 
