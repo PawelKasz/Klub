@@ -5,13 +5,11 @@
 //    : QObject{parent}
 //{
 
-void plat::mojSlot()
+void plat::mojSlot(int)
 {
     qDebug() << "Wypis z mojSlot";
 
 }
-
-
 
 short plat::oblicza_kon( int wychyl_lotki, int kont_natarcia ){
 
@@ -34,7 +32,7 @@ short plat::oblicza_kon( int wychyl_lotki, int kont_natarcia ){
 void plat::rysujLotke(){
 
 }
-
+/*
 void plat::rysujPlat(int srodekPlata[]){
     for (int i=0; i<2;i++){
         int xy1 = srodekPlata[i];
@@ -46,11 +44,12 @@ void plat::rysujPlat(int srodekPlata[]){
 
     }
 }
-
+*/
+/*
 Moje_dane plat::Funkcja()
 {
 
 }
-
+*/
 //return 0;
 //}

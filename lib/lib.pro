@@ -10,12 +10,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    wiatr.cpp \
     dialog.cpp \
     skrzydlo.cpp \
     mainwindow.cpp \
     plat.cpp
 
 HEADERS += \
+    wiatr.h \
     lib_global.h \
     dialog.h \
     skrzydlo.h \

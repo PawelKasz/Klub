@@ -2,13 +2,14 @@
 #define PLAT_H
 
 #include <QObject>
-
+/*
 struct Moje_dane    //przykladowa struktura
 {
     int wynik1;
     int wynik2;
     std::string wynik_txt;
 };
+*/
 
 class plat : public QObject //deklaracja klasy plat
 {
@@ -28,7 +29,7 @@ public:     //skladniki klasy plat
     // char str;
             //metody klasy plat
     short oblicza_kon(int wychyl_lotki, int kont_natarcia);       //Oblicza kont natarcia plata
-    Moje_dane Funkcja();
+    //Moje_dane Funkcja();
     void rysujLotke();
     void rysujPlat(int srodekPlata[]);
 
@@ -38,9 +39,9 @@ public:     //skladniki klasy plat
 signals:
     void mySignals();
 
-private slots:
+public slots:
     //void on_pushButon();
-    void mojSlot();
+    void mojSlot(int wychyl_lotki);
 
 /*
 plat(int, int wychyl_lotki, int sila_nosna)
@@ -49,5 +50,7 @@ plat(int, int wychyl_lotki, int sila_nosna)
     wychyl_lotki = 0;
 }
 */
+
 };
+
 #endif // PLAT_H

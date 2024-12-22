@@ -2,8 +2,9 @@
 #include <QDebug>
 #include <math.h>
 
-skrzydlo::skrzydlo(Punkt srodek, int dlugosc, float kat):m_srodek(srodek), m_dlugosc(dlugosc), m_kat(kat)
+skrzydlo::skrzydlo(Punkt srodek, int dlugosc, float kat):m_srodek(srodek), m_dlugosc(dlugosc), m_kat(kat) //Konstruktor
 {
+
 
     /*
     double radians=1.04720, degres;
@@ -20,7 +21,7 @@ skrzydlo::skrzydlo(Punkt srodek, int dlugosc, float kat):m_srodek(srodek), m_dlu
     qDebug() << srodek.y;
     */
 }
-
+/*
 Punkt skrzydlo::GetPoczatek() const
 {
     float bok_a = 0;
@@ -42,8 +43,8 @@ Punkt skrzydlo::GetPoczatek() const
             //bok = qDegreesToRadians(kat);
             bok_a = m_dlugosc * sin(qDegreesToRadians(m_kat));
             qDebug()<< "X- " << bok_a ;
-            bok_b = (m_dlugosc * m_dlugosc) - pow(bok_a,2) /* (bok_a * bok_a)*/;
-            bok_b = roundevenf(bok_b);
+  //          bok_b = (m_dlugosc * m_dlugosc) - pow(bok_a,2)  (bok_a * bok_a);
+  //          bok_b = roundevenf(bok_b);
             bok_b = sqrt(bok_b);
             qDebug() << "Y- " << bok_b ;
 
@@ -85,7 +86,7 @@ Punkt skrzydlo::GetPoczatek() const
 
     return {};
 }
-
+*/
 Punkt skrzydlo::GetPoczatek2Ver() const
 {
     int pocz_s_x = m_srodek.x + m_dlugosc * sin(qDegreesToRadians(m_kat));
@@ -98,6 +99,7 @@ cieciwa skrzydlo::GetCieciwa() const
 {
     auto pocz = GetPoczatek2Ver();
     auto koniec = GetKoniec();
+
 
     return {pocz, koniec};
 }
@@ -112,7 +114,7 @@ Punkt skrzydlo::GetKoniec() const
     return {-wynik_x, -wynik_y};
 }
 
-short skrzydlo::oblicza_kont( int wychyl_lotki, int kont_natarcia ){
+short skrzydlo::oblicza_kont( int wychyl_lotki, int kont_natarcia ){        //Oblicza i zwraca kont natarcia
 
     if (wychyl_lotki > 0)
     {
@@ -129,21 +131,25 @@ short skrzydlo::oblicza_kont( int wychyl_lotki, int kont_natarcia ){
     return kont_natarcia;
 }
 
+/*
 void skrzydlo::rysujLotke(){
     qDebug() << "Wypis z rysujLotke ";
 }
+*/
 
 Punkt skrzydlo::srodek() const
 {
     return m_srodek;
 }
 
+/*
 float skrzydlo::kat() const
 {
     return m_kat;
 }
+*/
 
-void skrzydlo::setKat(float newKat)
+void skrzydlo::setKat(float newKat)         //Uzywane w testach
 {
     m_kat = newKat;
 }
@@ -156,4 +162,8 @@ void skrzydlo::setSrodek(const Punkt &newSrodek)
 void skrzydlo::slotLot(){
     qDebug() << "Wypis z slotLot ";
 
+}
+
+void skrzydlo::ustawWartosc(){
+    qDebug() << "COS";
 }

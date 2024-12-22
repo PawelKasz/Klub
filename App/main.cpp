@@ -1,9 +1,10 @@
 #include "mainwindow.h"
-#include<memory.h>
+#include <memory.h>
 #include <QApplication>
 #include "../lib/plat.h"
 #include "../lib/skrzydlo.h"
 #include "../lib/dialog.h"
+#include "../lib/wiatr.h"
 
 int main(int argc, char* argv[])
 {
@@ -13,6 +14,8 @@ int main(int argc, char* argv[])
 
     Punkt srodek{0, 0};
     skrzydlo skrz1(srodek, 100, 45);
+    Wiatr *wsk_wiatr = new Wiatr();
+    wsk_wiatr->ustawWartosc();
 
     std::vector<std::unique_ptr<skrzydlo>> SkrzydlataPolska;
     SkrzydlataPolska.emplace_back(std::make_unique<skrzydlo>(Punkt{0, 0}, 100, 45));
@@ -22,11 +25,11 @@ int main(int argc, char* argv[])
     //skrzydlo skrz2(Punkt{3, 4}, 300, 45);
     //skrzydlo skrz3({5, 6}, 300, 45);
 
-    Punkt resultPoczatek = skrz1.GetPoczatek2Ver();
-    Punkt resultKoniec = skrz1.GetKoniec();
+    //Punkt resultPoczatek = skrz1.GetPoczatek2Ver();
+    //Punkt resultKoniec = skrz1.GetKoniec();
 
-    Punkt sr{10, 15};
-    skrzydlo skrzydloMK(sr);
+    //Punkt sr{10, 15};
+    //skrzydlo skrzydloMK(sr);
 
     Dialog w(/*&plat1,*/ &skrz1);
 
@@ -39,7 +42,7 @@ int main(int argc, char* argv[])
            //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 
     //qDebug() << "Hello" ;
-    MainWindow window;
+    //MainWindow window;
     //window.move(250,150);
     //window.show();
 
