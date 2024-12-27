@@ -55,7 +55,7 @@ strzalka->setFlag(QGraphicsItem::ItemIsMovable);
     tr.rotate(45);
     rectangle->setTransform(tr);
 
-    rectangle->setFlag(QGraphicsItem::ItemIsMovable);
+
 
     //rectangle1 = scene->addRect(0, -50 , 5, 5);
 
@@ -69,7 +69,7 @@ strzalka->setFlag(QGraphicsItem::ItemIsMovable);
 
 
     NarysujLinie(pomarPen, p);
-    narysuj_strz(redPen, p);
+    //narysuj_strz(redPen, p);
 
     //line1 = scene->addLine(-50,100,200,190,blackPen);
     line2 = scene->addLine(-54, -1, -124,-1,greenPen);
@@ -78,13 +78,16 @@ strzalka->setFlag(QGraphicsItem::ItemIsMovable);
     line = scene->addLine(59, -1, 120, -1,greenPen);
 
     connect(uii->pushButton_2, SIGNAL(clicked()), this, SLOT(test()));      //DZIALA
+
     connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(quit()));
     connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(testowy_slot())); //DZIALA
     connect(this, SIGNAL(MKSignal()), p, SLOT(quit()));
     //connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(&wsk_dane));
     connect(uii->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(test()));  //Dziala
 
+    QObject::connect(uii->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(test()));  //Dziala
 }
+
 
 Dialog::Dialog(std::vector<std::unique_ptr<skrzydlo> > &skrzydlata_polska) : QDialog(nullptr) //nowy
     , uii(new Ui::Dialog)
@@ -148,28 +151,16 @@ void Dialog::NarysujLinie(QPen blackPen, skrzydlo *p)
 
 }
 
-void Dialog::narysuj_strz(QPen blackPen, skrzydlo *p){
 
-    QGraphicsItemGroup *strzalka;
-    strzalka = new QGraphicsItemGroup;
-    scene->addItem(strzalka);
-    strzalka->addToGroup(line1 = scene->addLine(0,10,50,10,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,10,50,20,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,20,70,0,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,-20,70,0,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,-10,50,-20,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(0,-10,50,-10,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(0,-10,0,10,blackPen));
-
-    strzalka->setX(-310);
-    strzalka->setFlag(QGraphicsItem::ItemIsMovable);
-
-}
 
 void Dialog::test(){
     emit MKSignal();
-    qDebug() << "TEST po zmianie";
-    dane = 100;
+
+    auto wynik = uii->horizontalSlider->value();
+    qDebug() << "wynik: " << wynik;
+
+    qDebug() << "TEST po zmianie" << dane;
+    dane += 1;
     wsk_dane->srodekSkrzy;
 }
 

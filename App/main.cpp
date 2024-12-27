@@ -5,6 +5,7 @@
 #include "../lib/skrzydlo.h"
 #include "../lib/dialog.h"
 #include "../lib/wiatr.h"
+#include <qtextedit.h>
 
 int main(int argc, char* argv[])
 {
@@ -31,9 +32,6 @@ int main(int argc, char* argv[])
     //Punkt sr{10, 15};
     //skrzydlo skrzydloMK(sr);
 
-    Dialog w(/*&plat1,*/ &skrz1);
-
-    w.show();
 
 
 
@@ -42,9 +40,12 @@ int main(int argc, char* argv[])
            //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 
     //qDebug() << "Hello" ;
-    //MainWindow window;
-    //window.move(250,150);
-    //window.show();
+    MainWindow window;
+    window.move(250,150);
+    window.show();
+
+    Dialog w(/*&plat1,*/ &skrz1);
+    w.show();
 
            //QTextEdit textedit;
            //textedit.show();

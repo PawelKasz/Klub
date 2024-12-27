@@ -5,7 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QGraphicsScene>
-
+#include <QGraphicsItemGroup>
 //#include "plat.h"
 #include "skrzydlo.h"
 
@@ -31,7 +31,7 @@ public:
     void NarysujLinie(QPen blackPen, skrzydlo *p);
 
     cieciwa ConvertToQtCoords(const cieciwa &nazwa) const;
-    void narysuj_strz(QPen blackPen, skrzydlo *p);
+
 
 signals:
     void MKSignal();
