@@ -20,7 +20,7 @@ class skrzydlo: public QObject {
     Q_OBJECT
 public:
      int num_plata;  //To zastąpi nazwę
-    int kont_natarcia{0}; //Tymczasowe wpisanie wartosci
+     int kont_natarcia{0}; //Tymczasowe wpisanie wartosci
      int sila_nosna;
      int wychyl_lotki;
      int srodekSkrzy[2]={100,100};
@@ -34,7 +34,7 @@ public:
 
      [[deprecated ("Uzywamy innej funkcji")]]
      //Punkt GetPoczatek() const;
-     Punkt srodek() const;              //Uzywane w twstach
+     Punkt srodek() const;              //Uzywane w testach
      Punkt GetKoniec() const;
      Punkt GetPoczatek2Ver() const;
      cieciwa GetCieciwa() const;

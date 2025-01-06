@@ -6,14 +6,12 @@
 #include <QGraphicsItem>
 #include <QDebug>
 #include <QPushButton>
+#include "../lib/strzalka.h"
+#include "wiatr.h"
 
-
-Dialog::Dialog(skrzydlo *p, QWidget *parent) //stary konstruktor
-    : QDialog(parent)
-    , uii(new Ui::Dialog)
+Dialog::Dialog(skrzydlo *skrzyd, Wiatr *wia, QWidget *parent):QDialog(parent), m_skrzydlo(skrzyd), m_wiatr(wia), uii(new Ui::Dialog)
 {
     uii->setupUi(this);
-
     scene = new QGraphicsScene (this);
     uii->graphicsView->setScene(scene);
 
@@ -25,26 +23,28 @@ Dialog::Dialog(skrzydlo *p, QWidget *parent) //stary konstruktor
     QPen blackPen(Qt::black);
     QPen redPen(Qt::red);
     QPen greenPen(Qt::green);
-    QPen pomarPen(QColor(81,72,151));
+    QPen pomarPen(QColor(25,72,140));
     blackPen.setWidth(3);
     greenPen.setWidth(5);
     pomarPen.setWidth(4);
 
-/*
-    QGraphicsItemGroup *strzalka;
-    strzalka = new QGraphicsItemGroup;
-    scene->addItem(strzalka);
-    strzalka->addToGroup(line1 = scene->addLine(0,10,50,10,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,10,50,20,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,20,70,0,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,-20,70,0,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(50,-10,50,-20,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(0,-10,50,-10,blackPen));
-    strzalka->addToGroup(line1 = scene->addLine(0,-10,0,10,blackPen));
+    auto group = m_wiatr->GetStrzalka()->getGroup();
+    scene->addItem(group);
 
-    strzalka->setX(220);
-strzalka->setFlag(QGraphicsItem::ItemIsMovable);
-*/
+//     QGraphicsItemGroup *strzalka;
+//     strzalka = new QGraphicsItemGroup;
+//     scene->addItem(strzalka);
+//     strzalka->addToGroup(line1 = scene->addLine(0,10,50,10,blackPen));
+//     strzalka->addToGroup(line1 = scene->addLine(50,10,50,20,blackPen));
+//     strzalka->addToGroup(line1 = scene->addLine(50,20,70,0,blackPen));
+//     strzalka->addToGroup(line1 = scene->addLine(50,-20,70,0,blackPen));
+//     strzalka->addToGroup(line1 = scene->addLine(50,-10,50,-20,blackPen));
+//     strzalka->addToGroup(line1 = scene->addLine(0,-10,50,-10,blackPen));
+//     strzalka->addToGroup(line1 = scene->addLine(0,-10,0,10,blackPen));
+
+//     strzalka->setX(220);
+// strzalka->setFlag(QGraphicsItem::ItemIsMovable);
+
 
     //ellipse = scene->addEllipse(-150, -200,300,100,blackPen,redBrush);
     //ellipse1 = scene->addEllipse(-50, -100, 100, 100,blackPen,greenBrush);
@@ -54,8 +54,6 @@ strzalka->setFlag(QGraphicsItem::ItemIsMovable);
     QTransform tr;                  //Transformacja
     tr.rotate(45);
     rectangle->setTransform(tr);
-
-
 
     //rectangle1 = scene->addRect(0, -50 , 5, 5);
 
@@ -68,7 +66,7 @@ strzalka->setFlag(QGraphicsItem::ItemIsMovable);
     //rectangle->setFlag(QGraphicsItem::ItemIsMovable);
 
 
-    NarysujLinie(pomarPen, p);
+    NarysujLinie(pomarPen, m_skrzydlo);
     //narysuj_strz(redPen, p);
 
     //line1 = scene->addLine(-50,100,200,190,blackPen);
@@ -77,34 +75,36 @@ strzalka->setFlag(QGraphicsItem::ItemIsMovable);
     //line = scene->addLine(200,-50,240,-50,greenPen);
     line = scene->addLine(59, -1, 120, -1,greenPen);
 
-    connect(uii->pushButton_2, SIGNAL(clicked()), this, SLOT(test()));      //DZIALA
-
-    connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(quit()));
     connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(testowy_slot())); //DZIALA
-    connect(this, SIGNAL(MKSignal()), p, SLOT(quit()));
+    connect(uii->pushButton_2, SIGNAL(clicked()), this, SLOT(test()));      //DZIALA
+    //connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(quit()));
+
+    connect(this, SIGNAL(MKSignal()), m_skrzydlo, SLOT(slotLot()));      //dziala
+    //connect(this, SIGNAL(MKSignal()), p, SLOT(slotLot()));
     //connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(&wsk_dane));
-    connect(uii->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(test()));  //Dziala
 
-    QObject::connect(uii->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(test()));  //Dziala
+    // Kiedy Sliser_1 zmieni wartość to wiatr ustawia kierunek;
+    QObject::connect(uii->horizontalSlider_1, SIGNAL(valueChanged(int)), m_wiatr, SLOT(UstawKierunek(int)));  //Dziala
+
+    connect(uii->horizontalSlider_2, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_2_pressed(int)));  //Dziala
 }
 
 
-Dialog::Dialog(std::vector<std::unique_ptr<skrzydlo> > &skrzydlata_polska) : QDialog(nullptr) //nowy
-    , uii(new Ui::Dialog)
-{
-    uii->setupUi(this);
-    QPen pomarPen(QColor(81,72,151));
-    scene = new QGraphicsScene (this);
-    uii->graphicsView->setScene(scene);
+// Dialog::Dialog(std::vector<std::unique_ptr<skrzydlo> > &skrzydlata_polska) : QDialog(nullptr) //nowy
+//     , uii(new Ui::Dialog)
+// {
+//     uii->setupUi(this);
+//     QPen pomarPen(QColor(81,72,151));
+//     scene = new QGraphicsScene (this);
+//     uii->graphicsView->setScene(scene);
 
-    for(auto &i: skrzydlata_polska)
-    {
-        NarysujLinie(pomarPen, i.get());
-    }
-}
+//     for(auto &i: skrzydlata_polska)
+//     {
+//         NarysujLinie(pomarPen, i.get());
+//     }
+// }
 
-Dialog::~Dialog()
-{
+Dialog::~Dialog(){
     delete uii;
 }
 
@@ -125,10 +125,10 @@ void Dialog::NarysujLinie(QPen blackPen, skrzydlo *p)
 {
     //auto wysokosc = uii->graphicsView->sceneRect().height();
     //auto szerokosc = uii->graphicsView->sceneRect().width();
-
+/*
     auto poczatek2Ver = p->GetPoczatek2Ver();
     auto koniec = p->GetKoniec();
-
+*/
     //int xPocznew = 70;
     //int xPocznew = poczatek2Ver.x;
     //int xKoniecNew = -112;
@@ -149,19 +149,21 @@ void Dialog::NarysujLinie(QPen blackPen, skrzydlo *p)
 
     m_moja_linia = scene->addLine(newcieciwa.poczatek.x, newcieciwa.poczatek.y, newcieciwa.koniec.x, newcieciwa.koniec.y,blackPen);
 
+    auto get_dane_zDialog(&Dialog::dane);
 }
 
-
-
 void Dialog::test(){
-    emit MKSignal();
+    //emit MKSignal();
 
-    auto wynik = uii->horizontalSlider->value();
-    qDebug() << "wynik: " << wynik;
+    auto wynik = uii->horizontalSlider_1->value();
+    qDebug() << "Slider_1_wynik: " << wynik;
+    qDebug() << "wypis z TEST" << dane;
+    dane = wynik;
+    dane1 = dane;
 
-    qDebug() << "TEST po zmianie" << dane;
-    dane += 1;
-    wsk_dane->srodekSkrzy;
+    qDebug() << *wsk_dane;
+    qDebug() << dane1;
+
 }
 
 void Dialog::on_pushButton_1_clicked()
@@ -181,7 +183,7 @@ void Dialog::on_pushButton_2_clicked()
 
 }
 
-void Dialog::on_horizontalSlider_valueChanged(int )
+void Dialog::on_horizontalSlider_1_valueChanged(int )   //wyk1
 {
     //int wartosc = value;
     qDebug() << "Wcisnieto przycisk slider Kier_wiatru";
@@ -190,6 +192,7 @@ void Dialog::on_horizontalSlider_valueChanged(int )
 
     auto const poprzedni_kat = m_moja_linia->rotation();
     m_moja_linia->setRotation(poprzedni_kat+10);
+   // m_skrzydlo->set
     //scene->removeItem(m_moja_linia);
 
     QTransform tr;
@@ -200,9 +203,17 @@ void Dialog::on_horizontalSlider_valueChanged(int )
 void Dialog::on_horizontalSlider_2_pressed(int value)
 {
     qDebug() << "Okkk";
-    Dialog::dane = value;    
+    if(m_wiatr)
+    {
+        // m_wiatr
+    }
+    Dialog::dane = value;
+    //Wiatr::otrzymany_kier_wiatr = value;
+    qDebug() << "Wartosc" << value;
+    // return value;
+
 }
 
 void Dialog::testowy_slot(){
-    qDebug() << "zzzzzzzzz";
+    qDebug() << "Wyp z testowy_slot";
 }

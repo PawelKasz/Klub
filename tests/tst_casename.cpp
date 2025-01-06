@@ -451,7 +451,8 @@ TEST(dialog, Przeliczenie_x_y){
     QApplication program(argc, argv);
 
     skrzydlo punkt({0, 0}, 300, 45);
-    Dialog ob(&punkt);
+    Wiatr wia;
+    Dialog ob(&punkt, &wia);
 
     // act
     auto cieciwa = punkt.GetCieciwa();
@@ -465,4 +466,13 @@ TEST(dialog, Przeliczenie_x_y){
     EXPECT_EQ(cieciwa.poczatek.y, -result.poczatek.y);
     EXPECT_EQ(cieciwa.koniec.y, -result.koniec.y);
 
+}
+
+TEST(strzalka, ramka_poz){
+
+    // arrange
+
+    // act
+
+    // assert
 }

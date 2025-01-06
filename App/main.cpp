@@ -5,23 +5,34 @@
 #include "../lib/skrzydlo.h"
 #include "../lib/dialog.h"
 #include "../lib/wiatr.h"
+#include "../lib/strzalka.h"
 #include <qtextedit.h>
 
 int main(int argc, char* argv[])
 {
     QApplication program(argc, argv);
-    //int *poz;
-    plat plat1;  //Tworzy obiekt klasy plat
 
     Punkt srodek{0, 0};
-    skrzydlo skrz1(srodek, 100, 45);
-    Wiatr *wsk_wiatr = new Wiatr();
-    wsk_wiatr->ustawWartosc();
+    skrzydlo skrz1(srodek, 100, 45);        //stworzenie objektu strz1
 
-    std::vector<std::unique_ptr<skrzydlo>> SkrzydlataPolska;
-    SkrzydlataPolska.emplace_back(std::make_unique<skrzydlo>(Punkt{0, 0}, 100, 45));
-    SkrzydlataPolska.emplace_back(std::make_unique<skrzydlo>(Punkt{50, 50}, 150, 65));
-//     Dialog w(SkrzydlataPolska);
+    Wiatr wiatr;     //stworzenie obiektu Wiatr i ustawienie na niego wskaznika
+    wiatr.ustawWartosc_wiatr();      //wywolanie metody dla objektu Wiatr przez wskaznik
+
+    Dialog w(&skrz1, &wiatr);
+    w.show();
+
+
+
+
+
+
+
+    // Wiatr *wsk_wiatr_1 = new Wiatr();
+    // wsk_wiatr_1->ustawWartosc_wiatr();
+    // wsk_wiatr_1->obliczKier_wiatru();
+    // wsk_wiatr_1->kierunek_wiatru = 100;
+    // wsk_wiatr_1->otrzymany_kier_wiatr = 200;
+    // wsk_wiatr_1->obliczKier_wiatru();
 
     //skrzydlo skrz2(Punkt{3, 4}, 300, 45);
     //skrzydlo skrz3({5, 6}, 300, 45);
@@ -39,13 +50,11 @@ int main(int argc, char* argv[])
 
            //connect(w<-horizontalSlider_2, SIGNAL(slidermoved) this, SLOT(Lcdnumber_2));
 
-    //qDebug() << "Hello" ;
-    MainWindow window;
-    window.move(250,150);
-    window.show();
 
-    Dialog w(/*&plat1,*/ &skrz1);
-    w.show();
+    //MainWindow window;
+    // window.move(250,150);
+    //window.show();
+
 
            //QTextEdit textedit;
            //textedit.show();

@@ -64,7 +64,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QSlider" name="horizontalSlider">
+     <widget class="QSlider" name="horizontalSlider_1">
       <property name="maximum">
        <number>359</number>
       </property>
@@ -148,7 +148,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>horizontalSlider</sender>
+   <sender>horizontalSlider_1</sender>
    <signal>sliderMoved(int)</signal>
    <receiver>lcdNumber</receiver>
    <slot>display(int)</slot>

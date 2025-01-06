@@ -159,7 +159,7 @@ void skrzydlo::setSrodek(const Punkt &newSrodek)
     m_srodek = newSrodek;
 }
 
-void skrzydlo::slotLot(){
+void skrzydlo:: slotLot(){
     qDebug() << "Wypis z slotLot ";
 
 }
