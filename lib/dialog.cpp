@@ -74,6 +74,7 @@ Dialog::Dialog(skrzydlo *skrzyd, Wiatr *wia, QWidget *parent):QDialog(parent), m
     line = scene->addLine(0, -103, 0,-173,greenPen);
     //line = scene->addLine(200,-50,240,-50,greenPen);
     line = scene->addLine(59, -1, 120, -1,greenPen);
+    line = scene->addLine(0, 0, -150, 0,greenPen);
 
     connect(uii->pushButton_1, SIGNAL(clicked()), this, SLOT(testowy_slot())); //DZIALA
     connect(uii->pushButton_2, SIGNAL(clicked()), this, SLOT(test()));      //DZIALA

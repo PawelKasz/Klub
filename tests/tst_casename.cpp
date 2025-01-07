@@ -468,6 +468,7 @@ TEST(dialog, Przeliczenie_x_y){
 
 }
 
+
 TEST(strzalka, ramka_poz){
 
     // arrange
@@ -476,3 +477,52 @@ TEST(strzalka, ramka_poz){
 
     // assert
 }
+
+std::vector<int> Kopiuj(std::vector<int> const  &in)
+{
+    // int pierwszy = in.at(1);
+
+    std::vector<int> rezultat{in};
+    for(auto &i: in)
+    {
+        rezultat.push_back(i);
+    }
+
+    return rezultat;
+}
+
+
+TEST(KopiowanieTablicy, Test01)
+{
+    const std::vector<int> wejsciowy {1};
+
+    const std::vector<int> oczekiwany {1,1};
+
+    auto resultat = Kopiuj(wejsciowy);
+
+    EXPECT_EQ(resultat, oczekiwany);
+}
+
+
+TEST(KopiowanieTablicy, Test02)
+{
+    const std::vector<int> wejsciowy {1,2};
+
+    const std::vector<int> oczekiwany {1,2,1, 2};
+
+    auto resultat = Kopiuj(wejsciowy);
+
+    EXPECT_EQ(resultat, oczekiwany);
+}
+
+TEST(KopiowanieTablicy, Test03)
+{
+    const std::vector<int> wejsciowy {1,2, 3, 4};
+
+    const std::vector<int> oczekiwany {1,2,3, 4, 1, 2, 3, 4};
+
+    auto resultat = Kopiuj(wejsciowy);
+
+    EXPECT_EQ(resultat, oczekiwany);
+}
+

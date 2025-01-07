@@ -22,7 +22,7 @@ public:
 
     strzalka();
     QTimer *timer;
-    const int speed = 5*1000; // ms
+    const int speed = 50; // ms
 
     void PolorzenieStrz(int kierunek_wiatru);
     void setKierunekStrzalki(int x, int y);
@@ -30,7 +30,13 @@ public:
     Punkt1 getCostam();
 
     Punkt1 wyliczPolo_strzalki() ;
-    int tab_pol[360];
+
+    // int tab_pol[360];
+
+    static const int tab_size{359};
+    Punkt1 tab_pol[tab_size];
+
+
     QGraphicsItemGroup *getGroup() {
         return m_grupa_linii;
     }

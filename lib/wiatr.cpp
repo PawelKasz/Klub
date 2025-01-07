@@ -34,7 +34,7 @@ void Wiatr::UstawKierunek(int kierunek) //slot. wywolywane przez slider
     kierunek_wiatru = kierunek;
     qDebug() << "kierunek_wiatru - " << kierunek_wiatru;
     m_strzalka->SetPozycja(-150, 150);
-    m_strzalka->rysStrz(100, 100);
+    //m_strzalka->rysStrz(100, 100);
 
     for(int i=0 ; i<50 ; i=i+10){
     m_strzalka->narysuj_strz();

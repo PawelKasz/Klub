@@ -32,11 +32,13 @@ strzalka::strzalka()
         m_grupa_linii->addToGroup(i);
     }
 
-    m_grupa_linii->setX(-310);
+    m_grupa_linii->setX(-210);
     m_grupa_linii->setFlag(QGraphicsItem::ItemIsMovable);
-
+    int raz = 0;
+    if(raz==0){
     Punkt1 polo = wyliczPolo_strzalki();
-
+        raz = 1;
+    }
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &strzalka::narysuj_strz);
     // connect(timer, &QTimer::timeout, this, SLOT(updatePosition()));
@@ -46,13 +48,32 @@ strzalka::strzalka()
 
 void strzalka::narysuj_strz(){
     qDebug() << "lko_nar_strzalka";
-    //m_grupa_linii->setX(-200);
-    for(int i=1; i<8; i++){
-        int b =3, c;
-        b = b+(i*10);
-        strzalka::rysStrz(b, 10);
 
-    }
+    static int counter{0};
+    if(counter>185) counter =0;
+
+    //m_grupa_linii->setX(-200);
+   // int *wsk_ta_po = 0;
+    // wsk_ta_po = tab_pol;
+    // for(int i=0; i<8; i++){
+    //             int b, c;
+    //     b = *wsk_ta_po;
+
+
+    //     strzalka::rysStrz(wsk_ta_po, 10);
+    //     // wsk_ta_po +1;
+    //     wsk_ta_po++;
+    // }
+
+
+    // for(int i=0; i<8; i++){
+
+    //     strzalka::rysStrz(tab_pol[i].x, tab_pol[i].y);
+
+    // }
+
+    strzalka::rysStrz(tab_pol[counter].x, tab_pol[counter].y);
+    counter++;
 }
 
 void strzalka::SetPozycja(int x, int y)
@@ -69,17 +90,17 @@ void strzalka::PolorzenieStrz(int kierunek_wiatru){
 }
 
 Punkt1 strzalka::wyliczPolo_strzalki() {
-    int pol_szer = 309;
-    int pol_wys = 309;
+    int pol_szer = 220;
+    int pol_wys = 220;
     int polo_x{};
     int polo_y{};
 
-    constexpr int tab_size{185};
-    Punkt1 tab_pol[tab_size];
+    // constexpr int tab_size{185};
+    // Punkt1 tab_pol[tab_size];
 
     // std::array<int, 2> tablica;
 
-    for(int i=134;i<tab_size;i=i+1){
+    for(int i=0;i<tab_size;i=i+1){
         int g = i;
         if(i<45 || i==45){
         polo_x = pol_wys * tan(qDegreesToRadians(g));
@@ -100,17 +121,28 @@ Punkt1 strzalka::wyliczPolo_strzalki() {
             qDebug() << i << "III";
         }
         if((i>135 && i<180) || i==180){
-            polo_x = pol_wys * cos(qDegreesToRadians(g-90));
-            tab_pol[i].x = polo_x;
-            tab_pol[i].y = pol_szer;
+            polo_x = pol_wys * tan(qDegreesToRadians(g-180));
+
+            tab_pol[i].x = -polo_x;
+            tab_pol[i].y = -pol_szer;
             qDebug() << i << "IV";
         }
 
         qDebug() << i << "X " << polo_x << "TabX " << tab_pol[i].x;
         qDebug() << i << "Y " << polo_y << "TabY " << tab_pol[i].y;
 
+        int n = 180;
+        int start = 0;
+        int end = n-1;
+        //while (start<end) {
+            Punkt1 pierw = tab_pol[start];
+            Punkt1 ostat = tab_pol[end];
 
-    }
+        //}
+
+        }
+return {};
+}
 
 
 
@@ -121,12 +153,11 @@ Punkt1 strzalka::wyliczPolo_strzalki() {
 
     //return {polo_x, polo_y};
 
-    return {};
-}
+
 
 void strzalka::rysStrz(int x, int y){
 
-
+    qDebug() << "x = " << x << " y = " << y;
 
     //m_grupa_linii->setX(x);
     //m_grupa_linii->setY(y);
