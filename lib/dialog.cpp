@@ -65,7 +65,6 @@ Dialog::Dialog(skrzydlo *skrzyd, Wiatr *wia, QWidget *parent):QDialog(parent), m
     //rectangle = scene->addRect(0, 50, 5, 5);
     //rectangle->setFlag(QGraphicsItem::ItemIsMovable);
 
-
     NarysujLinie(pomarPen, m_skrzydlo);
     //narysuj_strz(redPen, p);
 
@@ -89,8 +88,6 @@ Dialog::Dialog(skrzydlo *skrzyd, Wiatr *wia, QWidget *parent):QDialog(parent), m
 
     connect(uii->horizontalSlider_2, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_2_pressed(int)));  //Dziala
 }
-
-
 // Dialog::Dialog(std::vector<std::unique_ptr<skrzydlo> > &skrzydlata_polska) : QDialog(nullptr) //nowy
 //     , uii(new Ui::Dialog)
 // {
@@ -108,7 +105,6 @@ Dialog::Dialog(skrzydlo *skrzyd, Wiatr *wia, QWidget *parent):QDialog(parent), m
 Dialog::~Dialog(){
     delete uii;
 }
-
 
 cieciwa Dialog::ConvertToQtCoords(cieciwa const &nazwa) const
 {

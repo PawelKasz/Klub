@@ -4,6 +4,7 @@
 #include <QtCore>
 #include <QGraphicsScene>
 #include <QGraphicsItemGroup>
+#include <vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,14 +28,22 @@ public:
     void PolorzenieStrz(int kierunek_wiatru);
     void setKierunekStrzalki(int x, int y);
     void narysuj_strz();
+    void odwrocenieTablicy();
     Punkt1 getCostam();
 
     Punkt1 wyliczPolo_strzalki() ;
+    Punkt1 wyliczPolo_strzalki_1();
+    void wsp_tangens(int kont, int bok_a);
+    int wsp_cosinus(int kont, int bok);
 
     // int tab_pol[360];
 
     static const int tab_size{359};
     Punkt1 tab_pol[tab_size];
+    typedef std::vector<int>vec_tab;
+    vec_tab v_tab;
+    vec_tab k1{};
+    vec_tab k2;
 
 
     QGraphicsItemGroup *getGroup() {
@@ -42,7 +51,6 @@ public:
     }
     //void rysStrz(int x, int y);
     void SetPozycja(int x, int y);
-
 
 private:
     QGraphicsScene *scene{nullptr};

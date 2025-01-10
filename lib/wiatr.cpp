@@ -14,9 +14,6 @@ strzalka *Wiatr::GetStrzalka() const
     return m_strzalka;
 }
 
-// void Wiatr::wiatrSignal(int){       //sygnal
-//     qDebug() << "klokol";
-//}
 int Wiatr::ustawWartosc_wiatr(){    //wywolywane teraz w main.cpp wyk1
 
     int a = 5;
@@ -33,12 +30,12 @@ void Wiatr::UstawKierunek(int kierunek) //slot. wywolywane przez slider
     //strzalka::narysuj_strz();
     kierunek_wiatru = kierunek;
     qDebug() << "kierunek_wiatru - " << kierunek_wiatru;
-    m_strzalka->SetPozycja(-150, 150);
+    //m_strzalka->SetPozycja(-150, 150);
     //m_strzalka->rysStrz(100, 100);
 
     for(int i=0 ; i<50 ; i=i+10){
     m_strzalka->narysuj_strz();
-    m_strzalka->SetPozycja(i+10, i+20);
+    //m_strzalka->SetPozycja(i+10, i+20);
 
     }
     qDebug() << " KI " << kierunek_wiatru;

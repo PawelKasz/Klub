@@ -15,7 +15,6 @@ struct cieciwa
     Punkt koniec{};
 };
 
-
 class skrzydlo: public QObject {
     Q_OBJECT
 public:
@@ -30,7 +29,6 @@ public:
 
      skrzydlo(){};                                                            //Konstruktor
      skrzydlo(Punkt srodek, int dlugosc = 300, float kat = 0);                //Konstruktor
-
 
      [[deprecated ("Uzywamy innej funkcji")]]
      //Punkt GetPoczatek() const;
@@ -54,7 +52,6 @@ public:
      int const      m_dlugosc{}; // Dlugosc odcinka skrzydła od środka do "Poczatku".
      float          m_kat{};
      float const m_proporcja{1.6}; // Proporcja czesci koncowej częsci skrzydla (60% dlugosci calkowitej)
-
 
  signals:
      void valueChanged(Punkt);

@@ -53,7 +53,5 @@ private:
     QGraphicsLineItem *line, *line1, *line2;
 
     QGraphicsLineItem *m_moja_linia{nullptr};
-
-
 };
 #endif // DIALOG_H
